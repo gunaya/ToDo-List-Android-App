@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
-    Button submitBtn, registerBtn;
+    Button submitBtn;
     SharePref sharePref;
+    TextView tx_signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         submitBtn = findViewById(R.id.btn_submit);
-        registerBtn = findViewById(R.id.btn_register);
+        tx_signup = findViewById(R.id.tv_sign_up);
+
+//        registerBtn = findViewById(R.id.btn_register);
 
         sharePref = new SharePref(this);
 
@@ -32,14 +36,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void Register() {
-        registerBtn.setOnClickListener(new View.OnClickListener() {
+        tx_signup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
+//        registerBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
+
 
     public void Login() {
         submitBtn.setOnClickListener(new View.OnClickListener() {
