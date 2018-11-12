@@ -1,44 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_background"
-    tools:context="com.zucc.todolist.LoginActivity"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp">
-    <ImageView
-        style="@style/image_style"
-        android:src="@drawable/savenote_2" />
-    <EditText
-        android:id="@+id/et_email"
-        style="@style/editText_style"
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        android:layout_marginTop="100dp"/>
-    <EditText
-        android:id="@+id/et_password"
-        style="@style/editText_style"
-        android:inputType="textPassword"
-        android:hint="Password"/>
+    tools:context="com.zucc.todolist.LoginActivity">
 
-    <Button
-        android:id="@+id/btn_submit"
-        style="@style/submit_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LOGIN"/>
-    <TextView
-        android:id="@+id/tv_sign_up"
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account?"
-        android:textColor="#ff0000"
-        android:layout_gravity="center"
-        />
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:visibility="visible"
+        android:padding="16dp"
+        android:id="@+id/login_layout">
+        <ImageView
+            style="@style/image_style"
+            android:src="@drawable/savenote_2" />
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/editText_style"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:layout_marginTop="100dp"/>
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/editText_style"
+            android:inputType="textPassword"
+            android:hint="Password"/>
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/submit_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOGIN"/>
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Sign Up Here"
+            android:textColor="#ff0000"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
     <!--<Button-->
         <!--android:id="@+id/btn_register"-->
         <!--style="@style/submit_style"-->
@@ -47,4 +63,5 @@
         <!--android:text="REGISTER"/>-->
 
 
-</LinearLayout>
+
+</RelativeLayout>

@@ -1,43 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_background"
     tools:context="com.zucc.todolist.RegisterActivity"
-    android:orientation="vertical"
-    android:paddingTop="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp">
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_username"
-        style="@style/editText_style"
-        android:inputType="textPersonName"
-        android:hint="Name"/>
-    <EditText
-        android:id="@+id/et_email"
-        style="@style/editText_style"
-        android:inputType="textEmailAddress"
-        android:hint="Email"/>
-    <EditText
-        android:id="@+id/et_phone"
-        style="@style/editText_style"
-        android:inputType="phone"
-        android:hint="Phone Number"/>
-    <EditText
-        android:id="@+id/et_password"
-        style="@style/editText_style"
-        android:inputType="textPassword"
-        android:hint="Password"/>
+    <ProgressBar
+        android:id="@+id/progress_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"/>
 
-    <Button
-        android:id="@+id/btn_submit"
-        style="@style/submit_style"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="REGISTER"/>
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:padding="16dp"
+        android:id="@+id/regis_layout"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
+        <EditText
+            android:id="@+id/et_username"
+            style="@style/editText_style"
+            android:inputType="textPersonName"
+            android:hint="Name"/>
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/editText_style"
+            android:inputType="textEmailAddress"
+            android:hint="Email"/>
+        <EditText
+            android:id="@+id/et_phone"
+            style="@style/editText_style"
+            android:inputType="phone"
+            android:hint="Phone Number"/>
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/editText_style"
+            android:inputType="textPassword"
+            android:hint="Password"/>
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/submit_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REGISTER"/>
+        <TextView
+            android:id="@+id/tv_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Sign In Here"
+            android:textColor="#ff0000"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
 
-</LinearLayout>
+
+
+</RelativeLayout>
