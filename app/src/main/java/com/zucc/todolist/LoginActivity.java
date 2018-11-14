@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.setError(getText(R.string.error_incorrect_password));
         } else {
             setGone();
-            mApiService.loginRequest(inEmail, inPassword).enqueue(new Callback<ResponseBody>() {
+            mApiService.loginRequest(etEmail.getText().toString(), etPassword.getText().toString()).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
@@ -114,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     setVisible();
+                    Log.d("Internet", "not connect");
                     Toast.makeText(LoginActivity.this, "Login Failed, no Internet Connection Detected", Toast.LENGTH_SHORT).show();
                 }
             });

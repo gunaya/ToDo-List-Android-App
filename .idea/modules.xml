@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ToDo-List-Android-App.iml" filepath="$PROJECT_DIR$/ToDo-List-Android-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kanTIn-Android-App.iml" filepath="$PROJECT_DIR$/kanTIn-Android-App.iml" />
     </modules>
   </component>
 </project>
