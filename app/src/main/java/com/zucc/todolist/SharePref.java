@@ -14,6 +14,7 @@ public class SharePref {
     public final static String KEY_EMAIL = "user_mail";
     public final static String KEY_PHONE = "user_phone";
     public final static String KEY_PASSWORD = "user_password";
+    public final static String KEY_ID = "0";
     public final static String KEY_VALUE = "0";
     private SharedPreferences sharedPreferences;
 

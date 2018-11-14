@@ -2,6 +2,7 @@ package com.zucc.todolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     TextView viewName, viewEmail, viewPhone;
     Button logutBtn;
     SharePref sharePref;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         viewEmail = findViewById(R.id.email);
         viewPhone = findViewById(R.id.phone);
         logutBtn = findViewById(R.id.btn_logut);
+        floatingActionButton = findViewById(R.id.btn_tambah);
 
         sharePref = new SharePref(this);
         String userName = sharePref.getDataString(SharePref.KEY_NAME);
@@ -38,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sharePref.setDataInt(SharePref.KEY_VALUE,0);
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TambahActivity.class);
                 startActivity(intent);
             }
         });

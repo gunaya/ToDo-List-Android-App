@@ -96,9 +96,15 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject jsonResults = new JSONObject(responseData);
                         if (jsonResults.getString("message").equals("success")){
                             setVisible();
+                            String name = jsonResults.getString("name");
+                            Integer id = jsonResults.getInt("id");
                             Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
+
                             sharePref.setDataString(SharePref.KEY_EMAIL, inEmail);
+                            sharePref.setDataString(SharePref.KEY_NAME, name);
                             sharePref.setDataInt(SharePref.KEY_VALUE,1);
+                            sharePref.setDataInt(SharePref.KEY_ID, id);
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
