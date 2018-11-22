@@ -25,7 +25,10 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".TambahActivity"></activity>
+        <activity android:name=".TambahActivity" />
+        <activity
+            android:name=".FragmentActivity"
+            android:label="@string/title_activity_fragment" />
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     TextView viewName, viewEmail, viewPhone;
     Button logutBtn;
+    Button fragmentBtn;
     SharePref sharePref;
     FloatingActionButton floatingActionButton;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         viewEmail = findViewById(R.id.email);
         viewPhone = findViewById(R.id.phone);
         logutBtn = findViewById(R.id.btn_logut);
+        fragmentBtn = findViewById(R.id.btn_fragment);
         floatingActionButton = findViewById(R.id.btn_tambah);
 
         sharePref = new SharePref(this);
@@ -41,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sharePref.setDataInt(SharePref.KEY_VALUE,0);
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        fragmentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sharePref.setDataInt(SharePref.KEY_VALUE,0);
+                Intent intent = new Intent(MainActivity.this, FragmentActivity.class);
                 startActivity(intent);
             }
         });

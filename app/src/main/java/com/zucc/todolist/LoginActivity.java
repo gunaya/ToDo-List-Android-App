@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                             sharePref.setDataInt(SharePref.KEY_VALUE,1);
                             sharePref.setDataInt(SharePref.KEY_ID, id);
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
                             startActivity(intent);
                         } else {
                             setVisible();

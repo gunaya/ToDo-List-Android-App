@@ -26,6 +26,9 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp">
+        <ImageView
+            style="@style/image_register_style"
+            android:src="@drawable/register" />
         <EditText
             android:id="@+id/et_username"
             style="@style/editText_style"
@@ -57,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? Sign In Here"
-            android:textColor="#ff0000"
+            android:textColor="#BA8B02"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
     </LinearLayout>

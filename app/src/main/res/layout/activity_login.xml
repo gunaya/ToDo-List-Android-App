@@ -26,7 +26,7 @@
         android:id="@+id/login_layout">
         <ImageView
             style="@style/image_style"
-            android:src="@drawable/savenote_2" />
+            android:src="@drawable/kantin" />
         <EditText
             android:id="@+id/et_email"
             style="@style/editText_style"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an account? Sign Up Here"
-            android:textColor="#ff0000"
+            android:textColor="#BA8B02"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
     </LinearLayout>
