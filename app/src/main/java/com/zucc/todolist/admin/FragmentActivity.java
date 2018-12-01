@@ -1,13 +1,18 @@
-package com.zucc.todolist;
+package com.zucc.todolist.admin;
 
-import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
+
+import com.zucc.todolist.R;
+import com.zucc.todolist.admin.fragment.DashboardFragment;
+import com.zucc.todolist.admin.fragment.HomeFragment;
+import com.zucc.todolist.admin.fragment.NotifFragment;
 
 public class FragmentActivity extends AppCompatActivity {
 
@@ -76,6 +81,22 @@ public class FragmentActivity extends AppCompatActivity {
 //            return false;
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure to exit?")
+                .setNegativeButton(R.string.no, null)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FragmentActivity.super.onBackPressed();
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                }).create().show();
+    }
 }
 
 //    @Override

@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.zucc.todolist.admin.FragmentActivity;
+import com.zucc.todolist.admin.TambahActivity;
+
 public class MainActivity extends AppCompatActivity {
     TextView viewName, viewEmail, viewPhone;
     Button logutBtn;

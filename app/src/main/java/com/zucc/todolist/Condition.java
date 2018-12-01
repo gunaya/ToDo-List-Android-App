@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.zucc.todolist.admin.FragmentActivity;
 
 /**
  * Created by Gunaya on 10/31/2018.
@@ -17,12 +20,12 @@ public class Condition extends Activity{
 
         SharePref sharePref = new SharePref(this);
         int val = sharePref.getDataInt(SharePref.KEY_VALUE,0);
-
-        if (val == 1) {
-            Intent intent = new Intent(Condition.this, MainActivity.class);
+        Log.d("Values",""+val);
+        if (val == 0) {
+            Intent intent = new Intent(Condition.this, LoginActivity.class);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(Condition.this, LoginActivity.class);
+            Intent intent = new Intent(Condition.this, FragmentActivity.class);
             startActivity(intent);
         }
     }

@@ -1,4 +1,4 @@
-package com.zucc.todolist;
+package com.zucc.todolist.admin.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zucc.model.makanan;
+import com.zucc.todolist.R;
 import com.zucc.todolist.adapter.DashboardAdapterActivity;
 
 import java.util.ArrayList;
@@ -45,8 +46,7 @@ public class DashboardFragment extends Fragment {
 
         recyclerViewOn = v.findViewById(R.id.rv_dashboard);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),
-                LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         dashboardAdapterActivity = new DashboardAdapterActivity(getContext(), Listmakanan);
         recyclerViewOn.setLayoutManager(layoutManager);
         recyclerViewOn.setAdapter(dashboardAdapterActivity);
