@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -30,6 +30,7 @@
         <activity
             android:name=".admin.FragmentActivity"
             android:label="@string/title_activity_fragment" />
+        <activity android:name=".SelectedDrink"></activity>
     </application>
 
 </manifest>

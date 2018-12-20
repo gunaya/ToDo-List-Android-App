@@ -1,5 +1,9 @@
 package com.zucc.todolist.apihelper;
 
+import com.zucc.model.RespDataKantin;
+
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -32,4 +36,7 @@ public interface BaseApiService {
                                             @Field("harga_jual") int harga_jual,
                                             @Field("jumlah") int jumlah,
                                             @Field("kategori_id") int kategori_id);
+    @FormUrlEncoded
+    @POST("kantin/get")
+    Call<List<RespDataKantin>> getMakanan(@Field("kategori_id") int kategori_id);
 }
