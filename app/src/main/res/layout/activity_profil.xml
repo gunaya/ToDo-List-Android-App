@@ -4,21 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zucc.todolist.MainActivity"
+    tools:context="com.zucc.todolist.ProfilActivity"
     android:orientation="vertical">
 
-    <android.support.design.widget.FloatingActionButton
+    <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        app:srcCompat="@drawable/ic_note_add"
-        app:pressedTranslationZ="12dp"
-        android:id="@+id/btn_tambah"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
     <LinearLayout
+        android:id="@+id/profil_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -30,49 +27,59 @@
         android:paddingRight="16dp"
         android:visibility="visible">
 
-        <TextView
+        <EditText
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:text="hello world"
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="hello world"
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="hello world"
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Edit" />
+
+            <Button
+                android:id="@+id/btn_logut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="LOG OUT" />
+        </LinearLayout>
+
         <Button
-            android:id="@+id/btn_logut"
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:text="LOG OUT" />
-        <Button
-            android:id="@+id/btn_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:text="Fragment" />
+            android:layout_marginTop="10dp"
+            android:text="Simpan"
+            android:visibility="invisible"/>
     </LinearLayout>
-
-
 </RelativeLayout>

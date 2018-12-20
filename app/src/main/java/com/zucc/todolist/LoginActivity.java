@@ -99,10 +99,12 @@ public class LoginActivity extends AppCompatActivity {
                             setVisible();
                             String name = jsonResults.getString("name");
                             Integer id = jsonResults.getInt("id");
+                            String phone = jsonResults.getString("phone");
                             Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
 
                             sharePref.setDataString(SharePref.KEY_EMAIL, inEmail);
                             sharePref.setDataString(SharePref.KEY_NAME, name);
+                            sharePref.setDataString(SharePref.KEY_PHONE, phone);
                             sharePref.setDataInt(SharePref.KEY_VALUE,1);
                             sharePref.setDataInt(SharePref.KEY_ID, id);
 
@@ -113,9 +115,9 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Email or Password Wrong", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Email or Password Wrong", Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Email and Password Wrong", Toast.LENGTH_SHORT).show();
                     }
                 }
 

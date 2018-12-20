@@ -39,4 +39,11 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("kantin/get")
     Call<List<RespDataKantin>> getMakanan(@Field("kategori_id") int kategori_id);
+
+    @FormUrlEncoded
+    @POST("kantin/profil/update")
+    Call<ResponseBody> updateProfil(@Field("name") String name,
+                                    @Field("email") String email,
+                                    @Field("phone") String phone,
+                                    @Field("id") int id);
 }
