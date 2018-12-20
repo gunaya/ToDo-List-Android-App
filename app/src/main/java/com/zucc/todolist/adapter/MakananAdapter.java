@@ -12,36 +12,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zucc.model.RespDataKantin;
-import com.zucc.model.minuman;
 import com.zucc.todolist.R;
 import com.zucc.todolist.SelectedDrink;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
-import okhttp3.ResponseBody;
+/**
+ * Created by Gunaya on 12/20/2018.
+ */
 
-public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHolder>{
-
+public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHolder>{
     private Context context;
     private List<RespDataKantin> dataKantins;
 
-    public MinumanAdapter(Context context, List<RespDataKantin> dataKantins){
+    public MakananAdapter(Context context, List<RespDataKantin> dataKantins){
         this.context = context;
         this.dataKantins = dataKantins;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
-        view = inflater.inflate(R.layout.activity_list_home_activity, parent ,false);
+        view = inflater.inflate(R.layout.activity_list_home_activity, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final RespDataKantin respDataKantin = dataKantins.get(position);
         holder.tv_makanan.setText(respDataKantin.getNamaBarang());
         holder.tv_makanan_harga.setText(respDataKantin.getHargaJual());
@@ -49,18 +50,14 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(holder.itemView.getContext(), SelectedDrink.class);
-
-
                 int id_data = respDataKantin.getId();
                 String nama_barang = respDataKantin.getNamaBarang();
                 String harga_jual = respDataKantin.getHargaJual();
 
                 intent.putExtra("id_data", id_data);
-                intent.putExtra("nama_data",nama_barang);
-                intent.putExtra("harga_jual",harga_jual);
-
+                intent.putExtra("nama_data", nama_barang);
+                intent.putExtra("harga_jual", harga_jual);
 
                 Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
                 holder.itemView.getContext().startActivity(intent);
@@ -74,8 +71,7 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
         return dataKantins.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_makanan_bg;
         TextView tv_makanan;
         TextView tv_makanan_harga;
@@ -88,7 +84,6 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
             tv_makanan = itemView.findViewById(R.id.tv_nama_makanan);
             tv_makanan_harga = itemView.findViewById(R.id.tv_price_makaanan);
             cardView = itemView.findViewById(R.id.cv_makanan);
-
         }
     }
 }

@@ -44,7 +44,6 @@ public class DashboardAdapterActivity extends RecyclerView.Adapter<DashboardAdap
 
     }
 
-
     @Override
     public int getItemCount() {
         return makanans.size();

@@ -10,12 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.zucc.model.RespDataKantin;
 import com.zucc.model.makanan;
 import com.zucc.todolist.R;
 import com.zucc.todolist.adapter.DashboardAdapterActivity;
+import com.zucc.todolist.adapter.MakananAdapter;
 import com.zucc.todolist.adapter.MinumanAdapter;
 import com.zucc.todolist.apihelper.BaseApiService;
 import com.zucc.todolist.apihelper.RetrofitClient;
@@ -34,12 +36,14 @@ public class DashboardFragment extends Fragment {
 
 //    Minuman
     List<RespDataKantin> dataKantins = new ArrayList<>();
+    List<RespDataKantin> dataMakanan = new ArrayList<>();
     MinumanAdapter minumanAdapter;
+    MakananAdapter makananAdapter;
 
     BaseApiService apiService;
 
 
-    RecyclerView rv_minum;
+    RecyclerView rv_minum, rv_makanan;
 
     @Nullable
     @Override
@@ -49,42 +53,46 @@ public class DashboardFragment extends Fragment {
         apiService = RetrofitClient.getService();
 
         rv_minum = view.findViewById(R.id.rv_minuman);
-
-        setMyMakanan(view);
+        rv_makanan = view.findViewById(R.id.rv_makanan);
 
         setDataMinuman(view);
+        setDataMakanan(view);
         return view;
     }
-    public void setMyMakanan (View v) {
+    public void setDataMakanan(View view){
 
-        RecyclerView recyclerViewOn;
+        apiService.getMakanan(1)
+                .enqueue(new Callback<List<RespDataKantin>>() {
+                    @Override
+                    public void onResponse(Call<List<RespDataKantin>> call, Response<List<RespDataKantin>> response) {
+                        if (response.isSuccessful()){
+                            Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
+                            dataMakanan.addAll(response.body());
+                            setAdapterMakanan();
+                        } else {
+                            Toast.makeText(getContext(), "data Kosong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
-        DashboardAdapterActivity dashboardAdapterActivity;
+                    @Override
+                    public void onFailure(Call<List<RespDataKantin>> call, Throwable t) {
+                        Toast.makeText(getContext(), "API Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
-        Listmakanan = new ArrayList<>();
-
-        for (int i=0; i<6; i++){
-            Listmakanan.add(new makanan("Miles 22", "Rp.5.000", R.drawable.bir));
-            Listmakanan.add(new makanan("Miasases 22", "Rp.5.000", R.drawable.bir));
-            Listmakanan.add(new makanan("assaes 22", "Rp.6.000", R.drawable.bir));
-        }
-
-        recyclerViewOn = v.findViewById(R.id.rv_dashboard);
-
+    private void setAdapterMakanan(){
+        makananAdapter = new MakananAdapter(getContext(), dataMakanan);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL, false);
-        dashboardAdapterActivity = new DashboardAdapterActivity(getContext(), Listmakanan);
-        recyclerViewOn.setLayoutManager(layoutManager);
-        recyclerViewOn.setAdapter(dashboardAdapterActivity);
-
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        rv_makanan.setLayoutManager(layoutManager);
+        rv_makanan.setAdapter(makananAdapter);
     }
 
     public  void setDataMinuman(View view){
-        RecyclerView rv_minum = view.findViewById(R.id.rv_minuman);
 
-
-
-       apiService.getMakanan(1)
+       apiService.getMakanan(2)
                .enqueue(new Callback<List<RespDataKantin>>() {
                    @Override
                    public void onResponse(Call<List<RespDataKantin>> call, Response<List<RespDataKantin>> response) {

@@ -14,18 +14,16 @@
         app:titleTextColor="@color/cardview_light_background"
         android:background="@color/colorMain">
     </android.support.v7.widget.Toolbar>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Alkohol :"
-
-        android:layout_marginBottom="21dp"
-        android:textSize="30sp"/>
+        android:text="Makanan :"
+        android:layout_marginVertical="10dp"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_dashboard"
-        />
+        android:id="@+id/rv_makanan"></android.support.v7.widget.RecyclerView>
 
     <TextView
         android:layout_width="match_parent"
