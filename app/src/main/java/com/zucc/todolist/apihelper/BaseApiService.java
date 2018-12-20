@@ -8,6 +8,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -46,4 +47,7 @@ public interface BaseApiService {
                                     @Field("email") String email,
                                     @Field("phone") String phone,
                                     @Field("id") int id);
+
+    @GET("kantin/get/sql/")
+    Call<List<RespDataKantin>> getData();
 }
