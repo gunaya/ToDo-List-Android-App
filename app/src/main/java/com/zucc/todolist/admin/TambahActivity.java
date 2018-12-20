@@ -1,10 +1,8 @@
 package com.zucc.todolist.admin;
 
 import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,10 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zucc.todolist.LoginActivity;
-import com.zucc.todolist.MainActivity;
 import com.zucc.todolist.R;
-import com.zucc.todolist.RegisterActivity;
 import com.zucc.todolist.apihelper.ApiUtils;
 import com.zucc.todolist.apihelper.BaseApiService;
 import com.zucc.todolist.fragment.DatePickerFragment;
@@ -32,7 +27,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -153,7 +147,7 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
 //                    Log.d("status", ""+jsonResults.getString("message"));
 //                    if (jsonResults.getString("message").equals("success")) {
 //                        Toast.makeText(TambahActivity.this,"Input Data Success",Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(TambahActivity.this, MainActivity.class);
+//                        Intent intent = new Intent(TambahActivity.this, ProfilActivity.class);
 //                        startActivity(intent);
 //                    } else {
 //                        Toast.makeText(TambahActivity.this, "Input Correct Data", Toast.LENGTH_SHORT).show();

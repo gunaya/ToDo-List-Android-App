@@ -40,26 +40,6 @@ public class DashboardAdapterActivity extends RecyclerView.Adapter<DashboardAdap
         myViewHolder.iv_makanan_bg.setImageResource(makanans.get(position).getThumbnails());
         myViewHolder.tv_makanan_harga.setText(makanans.get(position).getPrice());
         myViewHolder.tv_makanan.setText(makanans.get(position).getTitle());
-//        myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-////                Intent intent = new Intent(context, DetailFilmActivity.class);
-////                //parsing data to detail
-////                intent.putExtra("Title", films.get(position).getTitle());
-////                intent.putExtra("Genre", films.get(position).getGenre());
-////                intent.putExtra("Duration", films.get(position).getDuration());
-////                intent.putExtra("Sutradara", films.get(position).getSutradara());
-////                intent.putExtra("Thumbnail", films.get(position).getThumbnails());
-////                intent.putExtra("Judul", films.get(position).getJudulTab());
-////                context.startActivity(intent);
-//
-//            }
-//        });
-
-//        Intent intent = new Intent(context, TestView.class);
-//        intent.p
 
 
     }
