@@ -75,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void setVisible() {
-        progressBar.setVisibility(View.GONE);
         loginLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     public void Login() {
@@ -93,9 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
-                        String responseData = response.body().string();
-                        JSONObject jsonResults = new JSONObject(responseData);
-                        if (jsonResults.getString("message").equals("success")){
+                        if (response.isSuccessful()){
+                            JSONObject jsonResults = new JSONObject(response.body().string());
                             setVisible();
                             String name = jsonResults.getString("name");
                             Integer id = jsonResults.getInt("id");
@@ -115,9 +114,9 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Email or Password Wrong", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(LoginActivity.this, "Email or Password Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "API ERROR", Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
-                        Toast.makeText(LoginActivity.this, "Email and Password Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error, Try Again", Toast.LENGTH_SHORT).show();
                     }
                 }
 

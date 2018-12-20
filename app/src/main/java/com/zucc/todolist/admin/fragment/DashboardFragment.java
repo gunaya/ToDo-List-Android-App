@@ -1,5 +1,8 @@
 package com.zucc.todolist.admin.fragment;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,17 +34,12 @@ import retrofit2.Response;
 
 
 public class DashboardFragment extends Fragment {
-
-    List<makanan> Listmakanan;
-
-//    Minuman
     List<RespDataKantin> dataKantins = new ArrayList<>();
     List<RespDataKantin> dataMakanan = new ArrayList<>();
     MinumanAdapter minumanAdapter;
     MakananAdapter makananAdapter;
 
     BaseApiService apiService;
-
 
     RecyclerView rv_minum, rv_makanan;
 
@@ -59,26 +57,40 @@ public class DashboardFragment extends Fragment {
         setDataMakanan(view);
         return view;
     }
+    protected boolean isOnline() {
+//        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void setDataMakanan(View view){
-
-        apiService.getMakanan(1)
-                .enqueue(new Callback<List<RespDataKantin>>() {
-                    @Override
-                    public void onResponse(Call<List<RespDataKantin>> call, Response<List<RespDataKantin>> response) {
-                        if (response.isSuccessful()){
-                            Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
-                            dataMakanan.addAll(response.body());
-                            setAdapterMakanan();
-                        } else {
-                            Toast.makeText(getContext(), "data Kosong", Toast.LENGTH_SHORT).show();
-                        }
+        if(isOnline()){
+            Toast.makeText(getContext(), "You are connected to Internet", Toast.LENGTH_SHORT).show();
+            apiService.getMakanan(1).enqueue(new Callback<List<RespDataKantin>>() {
+                @Override
+                public void onResponse(Call<List<RespDataKantin>> call, Response<List<RespDataKantin>> response) {
+                    if (response.isSuccessful()){
+                        Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
+                        dataMakanan.addAll(response.body());
+                        setAdapterMakanan();
+                    } else {
+                        Toast.makeText(getContext(), "data Kosong", Toast.LENGTH_SHORT).show();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<List<RespDataKantin>> call, Throwable t) {
-                        Toast.makeText(getContext(), "API Error", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                @Override
+                public void onFailure(Call<List<RespDataKantin>> call, Throwable t) {
+                    Toast.makeText(getContext(), "API Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            Toast.makeText(getContext(), "You are not connected to Internet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setAdapterMakanan(){
@@ -91,26 +103,27 @@ public class DashboardFragment extends Fragment {
     }
 
     public  void setDataMinuman(View view){
+        if(isOnline()){
+            apiService.getMakanan(2).enqueue(new Callback<List<RespDataKantin>>() {
+                @Override
+                public void onResponse(Call<List<RespDataKantin>> call, Response<List<RespDataKantin>> response) {
+                    if (response.isSuccessful()){
+                        Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
+                        dataKantins.addAll(response.body());
+                        setAdapterMinuman();
 
-       apiService.getMakanan(2)
-               .enqueue(new Callback<List<RespDataKantin>>() {
-                   @Override
-                   public void onResponse(Call<List<RespDataKantin>> call, Response<List<RespDataKantin>> response) {
-                       if (response.isSuccessful()){
-                           Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
-                           dataKantins.addAll(response.body());
-                           setAdapterMinuman();
+                    }else {
+                        Toast.makeText(getContext(), "data Kosong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<RespDataKantin>> call, Throwable t) {
+                    Toast.makeText(getContext(), "API Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
 
-                       }else {
-                           Toast.makeText(getContext(), "data Kosong", Toast.LENGTH_SHORT).show();
-                       }
-                   }
-
-                   @Override
-                   public void onFailure(Call<List<RespDataKantin>> call, Throwable t) {
-                       Toast.makeText(getContext(), "API Error", Toast.LENGTH_SHORT).show();
-                   }
-               });
+        }
     }
 
     private void setAdapterMinuman() {
