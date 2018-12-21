@@ -42,21 +42,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        foodEdit = view.findViewById(R.id.edit_makanan);
-        foodEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Fitur Akan Ditambahkan Pada Update Berikutnya", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        orderConfirm = view.findViewById(R.id.konfirmasi_pemesanan);
-        orderConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Fitur Akan Ditambahkan Pada Update Berikutnya", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return view;
     }

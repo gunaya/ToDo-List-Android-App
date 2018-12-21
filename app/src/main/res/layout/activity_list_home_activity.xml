@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!---->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content">-->
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_marginTop="30dp"
         android:layout_width="140dp"
-        android:layout_height="190dp"
+        android:layout_height="200dp"
         android:id="@+id/cv_makanan"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        app:cardCornerRadius="10dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,6 +22,9 @@
 
 
             <com.github.siyamed.shapeimageview.RoundedImageView
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:scaleType="fitXY"
                 android:id="@+id/iv_fim_bg_next"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -27,8 +32,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
-                android:src="@drawable/bir"
-                app:siRadius="10dp"
+                android:src="@drawable/burger"
+                android:layout_above="@id/tv_price_makaanan"
                 />
 
             <TextView
@@ -38,22 +43,21 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="0dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="0dp"
                 android:background="#92ffffff"
                 android:gravity="center_horizontal"
-                android:text="Searching"
-                android:textStyle="bold" />
+                android:text="Nama Barang"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tv_price_makaanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="-32dp"
                 android:background="#92ffffff"
                 android:gravity="center_horizontal"
-                android:text="BIR BINTANG"
+                android:text="Rp.0000"
+                android:layout_above="@id/tv_nama_makanan"
                 android:textSize="10sp" />
 
 
@@ -61,4 +65,61 @@
 
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+<!--</LinearLayout>-->
+
+
+<!--<android.support.v7.widget.CardView-->
+<!--android:layout_marginTop="30dp"-->
+<!--android:layout_width="140dp"-->
+<!--android:layout_height="190dp"-->
+<!--android:id="@+id/cv_makanan"-->
+<!--android:layout_marginRight="5dp"-->
+<!--android:layout_marginLeft="5dp"-->
+<!--&gt;-->
+<!--<RelativeLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:orientation="vertical">-->
+
+
+<!--<com.github.siyamed.shapeimageview.RoundedImageView-->
+<!--android:id="@+id/iv_fim_bg_next"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_alignParentStart="true"-->
+<!--android:layout_alignParentTop="true"-->
+<!--android:layout_marginStart="0dp"-->
+<!--android:layout_marginTop="0dp"-->
+<!--android:src="@drawable/bir"-->
+<!--app:siRadius="10dp"-->
+<!--/>-->
+
+<!--<TextView-->
+<!--android:id="@+id/tv_nama_makanan"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_alignParentEnd="true"-->
+<!--android:layout_alignParentBottom="true"-->
+<!--android:layout_marginEnd="0dp"-->
+<!--android:layout_marginBottom="24dp"-->
+<!--android:background="#92ffffff"-->
+<!--android:gravity="center_horizontal"-->
+<!--android:text="Searching"-->
+<!--android:textStyle="bold" />-->
+
+<!--<TextView-->
+<!--android:id="@+id/tv_price_makaanan"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_alignParentStart="true"-->
+<!--android:layout_marginStart="0dp"-->
+<!--android:layout_marginBottom="-32dp"-->
+<!--android:background="#92ffffff"-->
+<!--android:gravity="center_horizontal"-->
+<!--android:text="BIR BINTANG"-->
+<!--android:textSize="10sp" />-->
+
+
+<!--</RelativeLayout>-->
+
+<!--</android.support.v7.widget.CardView>-->
