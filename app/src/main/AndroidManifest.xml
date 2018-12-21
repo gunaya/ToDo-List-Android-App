@@ -34,7 +34,20 @@
             android:label="@string/title_activity_fragment" />
         <activity android:name=".SelectedDrink" />
         <activity android:name=".User.UserHomeActivity" />
-        <activity android:name=".User.DetailBarangActivity"></activity>
+        <activity android:name=".User.DetailBarangActivity" />
+
+        <service
+            android:name=".services.FirebaseNotification">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
