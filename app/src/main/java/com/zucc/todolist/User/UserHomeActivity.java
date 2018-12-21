@@ -1,6 +1,8 @@
 package com.zucc.todolist.User;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.zucc.model.RespDataKantin;
 import com.zucc.todolist.DB.DBHelper;
+import com.zucc.todolist.LoginActivity;
 import com.zucc.todolist.ProfilActivity;
 import com.zucc.todolist.R;
 import com.zucc.todolist.adapter.MakananAdapter;
@@ -128,5 +131,21 @@ public class UserHomeActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(UserHomeActivity.this,3);
         user_minuman.setLayoutManager(layoutManager);
         user_minuman.setAdapter(minumanAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure to exit?")
+                .setNegativeButton(R.string.no, null)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UserHomeActivity.super.onBackPressed();
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                }).create().show();
     }
 }
