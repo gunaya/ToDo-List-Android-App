@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.zucc.todolist.R;
 import com.zucc.todolist.SharePref;
 import com.zucc.todolist.apihelper.ApiUtils;
@@ -49,7 +50,11 @@ public class DetailBarangActivity extends AppCompatActivity {
         final int id_data = intent.getIntExtra("id_data",0);
         String nama_barang = intent.getStringExtra("nama_data");
         final String harga_jual = intent.getStringExtra("harga_jual");
+        final String img_barang = intent.getStringExtra("gambar_menu");
 
+        Glide.with(this)
+                .load(img_barang)
+                .into(iv_thumbnail);
         tv_title.setText(nama_barang);
         tv_price.setText(harga_jual);
 
