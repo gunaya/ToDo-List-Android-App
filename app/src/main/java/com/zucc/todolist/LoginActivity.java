@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zucc.todolist.User.UserHomeActivity;
 import com.zucc.todolist.admin.FragmentActivity;
 import com.zucc.todolist.apihelper.ApiUtils;
 import com.zucc.todolist.apihelper.BaseApiService;
@@ -99,16 +100,25 @@ public class LoginActivity extends AppCompatActivity {
                             String name = jsonResults.getString("name");
                             Integer id = jsonResults.getInt("id");
                             String phone = jsonResults.getString("phone");
+                            String isAdmin = jsonResults.getString("isAdmin");
                             Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
 
                             sharePref.setDataString(SharePref.KEY_EMAIL, inEmail);
                             sharePref.setDataString(SharePref.KEY_NAME, name);
                             sharePref.setDataString(SharePref.KEY_PHONE, phone);
+                            sharePref.setDataString(SharePref.IS_ADMIN, isAdmin);
                             sharePref.setDataInt(SharePref.KEY_VALUE,1);
                             sharePref.setDataInt(SharePref.KEY_ID, id);
 
-                            Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
-                            startActivity(intent);
+                            if (isAdmin.equals("Ya")){
+                                Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+                                startActivity(intent);
+                            }
+
+
                         } else {
                             setVisible();
                             Toast.makeText(LoginActivity.this, "Email or Password Wrong", Toast.LENGTH_SHORT).show();

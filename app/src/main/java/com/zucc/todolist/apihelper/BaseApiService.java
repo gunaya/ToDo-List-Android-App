@@ -47,7 +47,15 @@ public interface BaseApiService {
                                     @Field("email") String email,
                                     @Field("phone") String phone,
                                     @Field("id") int id);
+    @FormUrlEncoded
+    @POST("kantin/trans/add")
+    Call<ResponseBody> addTransaksi(@Field("id_barang") int id_barang,
+                                    @Field("id_user") int id_user,
+                                    @Field("harga") String harga,
+                                    @Field("status") int status);
 
     @GET("kantin/get/sql/")
     Call<List<RespDataKantin>> getData();
+
+
 }

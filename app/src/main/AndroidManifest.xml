@@ -31,7 +31,9 @@
         <activity
             android:name=".admin.FragmentActivity"
             android:label="@string/title_activity_fragment" />
-        <activity android:name=".SelectedDrink"></activity>
+        <activity android:name=".SelectedDrink" />
+        <activity android:name=".User.UserHomeActivity" />
+        <activity android:name=".User.DetailBarangActivity"></activity>
     </application>
 
 </manifest>
