@@ -47,11 +47,11 @@ public interface BaseApiService {
     Call<ResponseBody> addNewMenu(
             @Part MultipartBody.Part foto_barang,
             @Part("nama_barang") RequestBody nama_barang,
-            @Part("kaladuarsa")RequestBody kaladuarsa,
-            @Part("harga_beli")RequestBody harga_beli,
-            @Part("harga_jual")RequestBody harga_jual,
-            @Part("jumlah")RequestBody jumlah,
-            @Part("kategori_id")RequestBody kategori_id);
+            @Part("kadaluarsa") RequestBody kaladuarsa,
+            @Part("harga_beli") RequestBody harga_beli,
+            @Part("harga_jual") RequestBody harga_jual,
+            @Part("jumlah") RequestBody jumlah,
+            @Part("kategori_id") RequestBody kategori_id);
 
     @FormUrlEncoded
     @POST("kantin/get")
