@@ -1,6 +1,7 @@
 package com.zucc.todolist.apihelper;
 
 import com.zucc.model.RespDataKantin;
+import com.zucc.model.RespDataTrans;
 
 import java.util.List;
 
@@ -72,6 +73,9 @@ public interface BaseApiService {
 
     @GET("kantin/get/sql/")
     Call<List<RespDataKantin>> getData();
+
+    @GET("kantin/trans/get")
+    Call<List<RespDataTrans>> getDataTrans();
 
     @FormUrlEncoded
     @POST("kantin/update")
