@@ -45,6 +45,9 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
         holder.tv_makanan.setText(respDataKantin.getNamaBarang());
         holder.tv_makanan_harga.setText(respDataKantin.getHargaJual());
         SharePref sharePref = new SharePref(context);
+
+
+
         String admin = sharePref.getDataString(SharePref.IS_ADMIN);
         if (admin.equals("Ya")){
             holder.cardView.setOnClickListener(new View.OnClickListener() {
