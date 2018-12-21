@@ -34,7 +34,7 @@ public class NotifFragment extends Fragment {
     List<RespDataTrans> dataTrans = new ArrayList<>();
     TransaksiAdapter transaksiAdapter;
     BaseApiService apiService;
-    DBHelper dbHelper;
+    private DBHelper dbHelper;
 
     RecyclerView rv_notifikasi;
 
@@ -68,6 +68,8 @@ public class NotifFragment extends Fragment {
                         dbHelper.saveTransaksi(id, nama_barang, nama_user, harga, status);
                         Log.d("Trans", id+nama_barang+nama_user+harga+status);
                     }
+                } else {
+
                 }
             }
 
