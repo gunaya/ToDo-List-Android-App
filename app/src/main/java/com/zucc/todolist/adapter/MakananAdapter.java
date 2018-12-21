@@ -17,8 +17,6 @@ import com.zucc.todolist.SelectedDrink;
 import com.zucc.todolist.SharePref;
 import com.zucc.todolist.User.DetailBarangActivity;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**

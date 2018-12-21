@@ -12,15 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zucc.model.RespDataKantin;
-import com.zucc.model.minuman;
 import com.zucc.todolist.R;
 import com.zucc.todolist.SelectedDrink;
 import com.zucc.todolist.SharePref;
 import com.zucc.todolist.User.DetailBarangActivity;
 
 import java.util.List;
-
-import okhttp3.ResponseBody;
 
 public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHolder>{
 
