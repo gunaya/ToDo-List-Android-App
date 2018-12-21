@@ -30,12 +30,15 @@ import com.zucc.todolist.fragment.DatePickerFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -161,6 +164,7 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
                     Toast.makeText(TambahActivity.this,"path : "+path,Toast.LENGTH_SHORT).show();
                     String filename = path.substring(path.lastIndexOf("/")+1);
                     pictName.setText(filename);
+
 //                    et_logo_kategori.setText(filename);
 //                    mAlbumFiles = result;
 //                    Bundle bundle
@@ -187,13 +191,31 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
         int sellFoodPrice = Integer.parseInt(sellFood);
         String stockString = stock.getText().toString();
         int stockInt = Integer.parseInt(stockString);
+        String kategoriString = String.valueOf(category_id);
 //      Data Dummy
         String pict = path;
 
-        Log.d("Data",""+foodName+" "+buyFoodPrice+" "+sellFoodPrice+" "+stockInt+" "+currentDate+" "+pict+" "+category_id);
-        mApiService.tambahMakananRequest(foodName, pict, currentDate, buyFoodPrice, sellFoodPrice, stockInt, category_id).enqueue(new Callback<ResponseBody>() {
+        File file = new File(path);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("foto_barang"),file);
+        RequestBody nama = RequestBody.create(MediaType.parse("text/plain"),foodName);
+        RequestBody harga_beli = RequestBody.create(MediaType.parse("text/plain"),buyFood);
+        RequestBody harga_jual = RequestBody.create(MediaType.parse("text/plain"),sellFood);
+        RequestBody stok = RequestBody.create(MediaType.parse("text/plain"),stockString);
+        RequestBody kaladuarsa = RequestBody.create(MediaType.parse("text/plain"),currentDate);
+        RequestBody kategori = RequestBody.create(MediaType.parse("text/plain"),kategoriString);
+
+        MultipartBody.Part foto_barang = MultipartBody.Part.createFormData("foto_barang", file.getName(),requestFile);
+
+        Log.d("Data",""+foodName+" "+buyFoodPrice+" "+sellFoodPrice+" "+stockInt+" "+foto_barang+" "+pict+" "+category_id);
+//        mApiService.tambahMakananRequest(foodName, pict, currentDate, buyFoodPrice, sellFoodPrice, stockInt, category_id).enqueue(new Callback<ResponseBody>() {
+        mApiService.addNewMenu(foto_barang, nama, kaladuarsa, harga_beli, harga_jual, stok, kategori).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(TambahActivity.this, "success", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(TambahActivity.this, "gagal", Toast.LENGTH_SHORT).show();
+                }
 //                try {
 //                    String responseData = response.body().string();
 //                    JSONObject jsonResults = new JSONObject(responseData);
@@ -210,18 +232,18 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-                try {
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    if (jsonObject.getString("message").equals("success")) {
-                        Log.d("status","keisini");
-                        Log.d("status", ""+jsonObject.getString("message"));
-                        Toast.makeText(TambahActivity.this,"Input Data Success",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TambahActivity.this, FragmentActivity.class);
-                        startActivity(intent);
-                    }
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response.body().string());
+//                    if (jsonObject.getString("message").equals("success")) {
+//                        Log.d("status","keisini");
+//                        Log.d("status", ""+jsonObject.getString("message"));
+//                        Toast.makeText(TambahActivity.this,"Input Data Success",Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(TambahActivity.this, FragmentActivity.class);
+//                        startActivity(intent);
+//                    }
+//                } catch (IOException | JSONException e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override
