@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.zucc.todolist.ProfilActivity;
 import com.zucc.todolist.R;
@@ -17,7 +18,6 @@ import com.zucc.todolist.admin.TambahActivity;
 
 public class HomeFragment extends Fragment {
     CardView foodAdd, foodEdit, orderConfirm, profilEdit;
-
 
     @Nullable
     @Override
@@ -39,6 +39,22 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProfilActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        foodEdit = view.findViewById(R.id.edit_makanan);
+        foodEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Fitur Akan Ditambahkan Pada Update Berikutnya", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        orderConfirm = view.findViewById(R.id.konfirmasi_pemesanan);
+        orderConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Fitur Akan Ditambahkan Pada Update Berikutnya", Toast.LENGTH_SHORT).show();
             }
         });
 
