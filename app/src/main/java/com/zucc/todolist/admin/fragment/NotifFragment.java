@@ -45,7 +45,7 @@ public class NotifFragment extends Fragment {
         apiService = RetrofitClient.getService();
 
         rv_notifikasi = view.findViewById(R.id.rv_notifikasi);
-
+        dbHelper = new DBHelper(getContext());
         loadSql();
         setDataTrans(view);
 
@@ -57,7 +57,7 @@ public class NotifFragment extends Fragment {
             @Override
             public void onResponse(Call<List<RespDataTrans>> call, Response<List<RespDataTrans>> response) {
                 if (response.isSuccessful()){
-//                    dbHelper.deleteTrans();
+                    dbHelper.deleteTrans();
                     dataTrans.addAll(response.body());
                     for (int i=0; i < dataTrans.size(); i++){
                         String id = String.valueOf(dataTrans.get(i).getId());
@@ -65,7 +65,7 @@ public class NotifFragment extends Fragment {
                         String nama_user = dataTrans.get(i).getName();
                         String harga = dataTrans.get(i).getHarga();
                         String status = dataTrans.get(i).getStatus();
-//                        dbHelper.saveTransaksi(id, nama_barang, nama_user, harga, status);
+                        dbHelper.saveTransaksi(id, nama_barang, nama_user, harga, status);
                         Log.d("Trans", id+nama_barang+nama_user+harga+status);
                     }
                 }
@@ -100,6 +100,7 @@ public class NotifFragment extends Fragment {
                 for (int i =0; i < count; i++){
                     Log.d("test", dataTrans.get(i).getNamaBarang());
                 }
+                setDataTransAdapter();
             }
         });
     }

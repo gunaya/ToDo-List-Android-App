@@ -69,7 +69,7 @@ public class DBHelper {
     }
 
     public void deleteTrans(){
-        sqLiteDatabase.delete("transaksi", null,null);
+        sqLiteDatabase.delete(TRANS_NAME, null,null);
     }
 
     public List<RespDataTrans> getDataTrans(){
