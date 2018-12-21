@@ -2,7 +2,9 @@ package com.zucc.todolist.admin;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yanzhenjie.album.Action;
+import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumFile;
+import com.yanzhenjie.album.api.widget.Widget;
 import com.zucc.todolist.R;
 import com.zucc.todolist.apihelper.ApiUtils;
 import com.zucc.todolist.apihelper.BaseApiService;
@@ -26,8 +32,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,8 +50,12 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
     Button submitFood, getPict;
     Spinner getCategory;
     BaseApiService mApiService;
+    String path;
+
 
     ArrayAdapter<String> adapter;
+
+    MultipartBody.Part foto_barang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +75,14 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
         submitFood = findViewById(R.id.submit_food);
         getCategory = findViewById(R.id.set_category);
 
-        getPict.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,100);
-            }
-        });
+
+//        getPict.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent,100);
+//            }
+//        });
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +91,14 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
-
+        getPict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), UpdateFotoProfille.class);
+//                startActivity(intent);
+                selectImage();
+            }
+        });
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, category);
         getCategory.setAdapter(adapter);
         getCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,7 +147,39 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
         date.setText(currentDateString);
     }
 
+
+    private void selectImage() {
+        Album.image(this)
+                .singleChoice()
+                .camera(true)
+                .widget(
+                        Widget.newDarkBuilder(this)
+                                .build()
+                )
+                .onResult((Action<ArrayList<AlbumFile>>) result -> {
+                    path = result.get(0).getPath();
+                    Toast.makeText(TambahActivity.this,"path : "+path,Toast.LENGTH_SHORT).show();
+                    String filename = path.substring(path.lastIndexOf("/")+1);
+                    pictName.setText(filename);
+//                    et_logo_kategori.setText(filename);
+//                    mAlbumFiles = result;
+//                    Bundle bundle
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("path", path);
+//                    bundle.putString("filename", filename);
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+                })
+                .onCancel(new Action<String>() {
+                    @Override
+                    public void onAction(@NonNull String result) {
+                        Toast.makeText(TambahActivity.this, "cancell", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .start();
+    }
     public void sendData(){
+
         String foodName = name.getText().toString();
         String buyFood = buyPrice.getText().toString();
         int buyFoodPrice = Integer.parseInt(buyFood);
@@ -136,7 +188,8 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
         String stockString = stock.getText().toString();
         int stockInt = Integer.parseInt(stockString);
 //      Data Dummy
-        String pict = "Data Dummy";
+        String pict = path;
+
         Log.d("Data",""+foodName+" "+buyFoodPrice+" "+sellFoodPrice+" "+stockInt+" "+currentDate+" "+pict+" "+category_id);
         mApiService.tambahMakananRequest(foodName, pict, currentDate, buyFoodPrice, sellFoodPrice, stockInt, category_id).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -165,11 +218,8 @@ public class TambahActivity extends AppCompatActivity implements DatePickerDialo
                         Toast.makeText(TambahActivity.this,"Input Data Success",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(TambahActivity.this, FragmentActivity.class);
                         startActivity(intent);
-                    } else  {
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }

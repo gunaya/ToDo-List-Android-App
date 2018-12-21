@@ -4,12 +4,16 @@ import com.zucc.model.RespDataKantin;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * Created by Gunaya on 11/3/2018.
@@ -37,6 +41,18 @@ public interface BaseApiService {
                                             @Field("harga_jual") int harga_jual,
                                             @Field("jumlah") int jumlah,
                                             @Field("kategori_id") int kategori_id);
+
+    @Multipart
+    @POST("kantin/add")
+    Call<ResponseBody> addNewMenu(
+            @Part MultipartBody.Part foto_barang,
+            @Part("nama_barang") RequestBody nama_barang,
+            @Part("kaladuarsa")RequestBody kaladuarsa,
+            @Part("harga_beli")RequestBody harga_beli,
+            @Part("harga_jual")RequestBody harga_jual,
+            @Part("jumlah")RequestBody jumlah,
+            @Part("kategori_id")RequestBody kategori_id);
+
     @FormUrlEncoded
     @POST("kantin/get")
     Call<List<RespDataKantin>> getMakanan(@Field("kategori_id") int kategori_id);
