@@ -15,6 +15,8 @@ import com.zucc.model.RespDataKantin;
 import com.zucc.model.minuman;
 import com.zucc.todolist.R;
 import com.zucc.todolist.SelectedDrink;
+import com.zucc.todolist.SharePref;
+import com.zucc.todolist.User.DetailBarangActivity;
 
 import java.util.List;
 
@@ -45,27 +47,46 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
         final RespDataKantin respDataKantin = dataKantins.get(position);
         holder.tv_makanan.setText(respDataKantin.getNamaBarang());
         holder.tv_makanan_harga.setText(respDataKantin.getHargaJual());
+        SharePref sharePref = new SharePref(context);
+        String admin = sharePref.getDataString(SharePref.IS_ADMIN);
+        if (admin.equals("Ya")){
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(holder.itemView.getContext(), SelectedDrink.class);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    int id_data = respDataKantin.getId();
+                    String nama_barang = respDataKantin.getNamaBarang();
+                    String harga_jual = respDataKantin.getHargaJual();
 
-                Intent intent = new Intent(holder.itemView.getContext(), SelectedDrink.class);
+                    intent.putExtra("id_data", id_data);
+                    intent.putExtra("nama_data",nama_barang);
+                    intent.putExtra("harga_jual",harga_jual);
 
+                    Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+        } else {
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(holder.itemView.getContext(), DetailBarangActivity.class);
 
-                int id_data = respDataKantin.getId();
-                String nama_barang = respDataKantin.getNamaBarang();
-                String harga_jual = respDataKantin.getHargaJual();
+                    int id_data = respDataKantin.getId();
+                    String nama_barang = respDataKantin.getNamaBarang();
+                    String harga_jual = respDataKantin.getHargaJual();
 
-                intent.putExtra("id_data", id_data);
-                intent.putExtra("nama_data",nama_barang);
-                intent.putExtra("harga_jual",harga_jual);
+                    intent.putExtra("id_data", id_data);
+                    intent.putExtra("nama_data",nama_barang);
+                    intent.putExtra("harga_jual",harga_jual);
 
+                    Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            });
+        }
 
-                Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
-                holder.itemView.getContext().startActivity(intent);
-            }
-        });
 
     }
 
