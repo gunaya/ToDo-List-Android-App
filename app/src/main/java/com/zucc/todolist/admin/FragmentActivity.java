@@ -31,7 +31,7 @@ public class FragmentActivity extends AppCompatActivity {
         fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
     }
-    
+
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
 

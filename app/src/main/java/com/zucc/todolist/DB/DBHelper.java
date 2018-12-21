@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.zucc.model.RespDataKantin;
+import com.zucc.model.RespDataTrans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class DBHelper {
     private static final String DATABASE_NAME = "kantin.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 5;
     public static final String TABLE_NAME = "tb_barang";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "nama_barang";
@@ -26,6 +27,14 @@ public class DBHelper {
     public static final String COLUMN_EXP = "kadaluarsa";
     public static final String COLUMN_SALE = "harga_jual";
     public static final String COLUMN_CAT = "kategori_id";
+
+    public static final String TRANS_NAME = "transaksi";
+    public static final String TRANS_ID = "id";
+    public static final String TRANS_BARANG = "nama_barang";
+    public static final String TRANS_USER = "nama_user";
+    public static final String TRANS_HARGA = "harga";
+    public static final String TRANS_STATUS = "status";
+
     Helper openHelper;
     private SQLiteDatabase sqLiteDatabase;
 
@@ -44,9 +53,51 @@ public class DBHelper {
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
+    public void saveTransaksi(String id, String nama_barang, String nama_user, String harga, String status){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TRANS_ID, id);
+        contentValues.put(TRANS_BARANG, nama_barang);
+        contentValues.put(TRANS_USER, nama_user);
+        contentValues.put(TRANS_HARGA, harga);
+        contentValues.put(TRANS_STATUS, status);
+        sqLiteDatabase.insert(TRANS_NAME, null, contentValues);
+    }
+
     public void deleteData(){
         sqLiteDatabase.delete(TABLE_NAME,null,null);
         Log.d("delete", "success");
+    }
+
+    public void deleteTrans(){
+        sqLiteDatabase.delete("transaksi", null,null);
+    }
+
+    public List<RespDataTrans> getDataTrans(){
+        List<RespDataTrans> transList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = openHelper.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from "+TRANS_NAME, null);
+        int count = cursor.getCount();
+        if (count>0){
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String nama_barang = cursor.getString(cursor.getColumnIndex("nama_barang"));
+                String nama_user = cursor.getString(cursor.getColumnIndex("nama_user"));
+                String harga = cursor.getString(cursor.getColumnIndex("harga"));
+                String status = cursor.getString(cursor.getColumnIndex("status"));
+
+                RespDataTrans temp = new RespDataTrans();
+                temp.setId(id);
+                temp.setNamaBarang(nama_barang);
+                temp.setName(nama_user);
+                temp.setHarga(harga);
+                temp.setStatus(status);
+                transList.add(temp);
+            }
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return transList;
     }
 
     public List<RespDataKantin> getDataBarang(Integer kategori) {
@@ -95,12 +146,20 @@ public class DBHelper {
                     +COLUMN_PHOTO+ " TEXT, "
                     +COLUMN_EXP+ " TEXT, "
                     +COLUMN_SALE+ " TEXT, "
-                    +COLUMN_CAT+ " INTEGER )");
+                    +COLUMN_CAT+ " INTEGER );");
+
+            sqLiteDatabase.execSQL("CREATE TABLE " + TRANS_NAME + " ("
+                    +TRANS_ID+ " INTEGER, "
+                    +TRANS_BARANG+ " TEXT, "
+                    +TRANS_USER+ " TEXT, "
+                    +TRANS_HARGA+ " TEXT, "
+                    +TRANS_STATUS+ " TEXT )");
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS 'transaksi' ");
             onCreate(sqLiteDatabase);
         }
     }

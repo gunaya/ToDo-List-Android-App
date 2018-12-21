@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.zucc.model.RespDataTrans;
+import com.zucc.todolist.DB.DBHelper;
 import com.zucc.todolist.R;
 import com.zucc.todolist.adapter.TransaksiAdapter;
 import com.zucc.todolist.apihelper.BaseApiService;
@@ -33,6 +34,7 @@ public class NotifFragment extends Fragment {
     List<RespDataTrans> dataTrans = new ArrayList<>();
     TransaksiAdapter transaksiAdapter;
     BaseApiService apiService;
+    DBHelper dbHelper;
 
     RecyclerView rv_notifikasi;
 
@@ -44,9 +46,36 @@ public class NotifFragment extends Fragment {
 
         rv_notifikasi = view.findViewById(R.id.rv_notifikasi);
 
+        loadSql();
         setDataTrans(view);
 
         return view;
+    }
+
+    public void loadSql(){
+        apiService.getDataTrans().enqueue(new Callback<List<RespDataTrans>>() {
+            @Override
+            public void onResponse(Call<List<RespDataTrans>> call, Response<List<RespDataTrans>> response) {
+                if (response.isSuccessful()){
+//                    dbHelper.deleteTrans();
+                    dataTrans.addAll(response.body());
+                    for (int i=0; i < dataTrans.size(); i++){
+                        String id = String.valueOf(dataTrans.get(i).getId());
+                        String nama_barang = dataTrans.get(i).getNamaBarang();
+                        String nama_user = dataTrans.get(i).getName();
+                        String harga = dataTrans.get(i).getHarga();
+                        String status = dataTrans.get(i).getStatus();
+//                        dbHelper.saveTransaksi(id, nama_barang, nama_user, harga, status);
+                        Log.d("Trans", id+nama_barang+nama_user+harga+status);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RespDataTrans>> call, Throwable t) {
+
+            }
+        });
     }
 
     public void setDataTrans(View view){
@@ -66,7 +95,11 @@ public class NotifFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<RespDataTrans>> call, Throwable t) {
-
+                dataTrans = dbHelper.getDataTrans();
+                int count = dataTrans.size();
+                for (int i =0; i < count; i++){
+                    Log.d("test", dataTrans.get(i).getNamaBarang());
+                }
             }
         });
     }
