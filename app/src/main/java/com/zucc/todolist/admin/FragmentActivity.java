@@ -26,13 +26,11 @@ public class FragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
-
         btn_navView = findViewById(R.id.navigation);
         btn_navView.setOnNavigationItemSelectedListener(navListener);
         fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
     }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.zucc.model.RespDataKantin;
 import com.zucc.todolist.R;
 import com.zucc.todolist.SelectedDrink;
@@ -23,6 +24,7 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
 
     private Context context;
     private List<RespDataKantin> dataKantins;
+    static String img_name;
 
     public MinumanAdapter(Context context, List<RespDataKantin> dataKantins){
         this.context = context;
@@ -42,13 +44,17 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final RespDataKantin respDataKantin = dataKantins.get(position);
+        img_name = "http://praktikum.nusapenidaholidaytour.com/images/upload/"
+                +respDataKantin.getFotoBarang();
+
         holder.tv_makanan.setText(respDataKantin.getNamaBarang());
         holder.tv_makanan_harga.setText(respDataKantin.getHargaJual());
         SharePref sharePref = new SharePref(context);
-
-
-
         String admin = sharePref.getDataString(SharePref.IS_ADMIN);
+
+        Glide.with(context).load(img_name)
+                .into(holder.iv_makanan_bg);
+
         if (admin.equals("Ya")){
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,11 +65,14 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
                     String nama_barang = respDataKantin.getNamaBarang();
                     String harga_jual = respDataKantin.getHargaJual();
                     String jumlah = respDataKantin.getJumlah();
+                    String img = "http://praktikum.nusapenidaholidaytour.com/images/upload/"
+                            +respDataKantin.getFotoBarang();
 
                     intent.putExtra("id_data", id_data);
                     intent.putExtra("nama_data", nama_barang);
                     intent.putExtra("harga_jual", harga_jual);
                     intent.putExtra("jumlah", jumlah);
+                    intent.putExtra("gambar_menu", img);
 
                     Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
                     holder.itemView.getContext().startActivity(intent);
@@ -79,11 +88,14 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
                     String nama_barang = respDataKantin.getNamaBarang();
                     String harga_jual = respDataKantin.getHargaJual();
                     String jumlah = respDataKantin.getJumlah();
+                    String img = "http://praktikum.nusapenidaholidaytour.com/images/upload/"
+                            +respDataKantin.getFotoBarang();
 
                     intent.putExtra("id_data", id_data);
                     intent.putExtra("nama_data", nama_barang);
                     intent.putExtra("harga_jual", harga_jual);
                     intent.putExtra("jumlah", jumlah);
+                    intent.putExtra("gambar_menu", img);
 
                     Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
                     holder.itemView.getContext().startActivity(intent);

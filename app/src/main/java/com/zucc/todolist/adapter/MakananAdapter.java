@@ -97,7 +97,10 @@ public class MakananAdapter extends RecyclerView.Adapter<MakananAdapter.ViewHold
                     String nama_barang = respDataKantin.getNamaBarang();
                     String harga_jual = respDataKantin.getHargaJual();
                     String jumlah = respDataKantin.getJumlah();
+                    String img = "http://praktikum.nusapenidaholidaytour.com/images/upload/"
+                            +respDataKantin.getFotoBarang();
 
+                    intent.putExtra("gambar_menu",img);
                     intent.putExtra("id_data", id_data);
                     intent.putExtra("nama_data", nama_barang);
                     intent.putExtra("harga_jual", harga_jual);
