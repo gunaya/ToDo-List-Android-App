@@ -22,6 +22,9 @@
 
 
             <com.github.siyamed.shapeimageview.RoundedImageView
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:scaleType="fitXY"
                 android:id="@+id/iv_fim_bg_next"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
