@@ -55,10 +55,12 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
                     int id_data = respDataKantin.getId();
                     String nama_barang = respDataKantin.getNamaBarang();
                     String harga_jual = respDataKantin.getHargaJual();
+                    String jumlah = respDataKantin.getJumlah();
 
                     intent.putExtra("id_data", id_data);
-                    intent.putExtra("nama_data",nama_barang);
-                    intent.putExtra("harga_jual",harga_jual);
+                    intent.putExtra("nama_data", nama_barang);
+                    intent.putExtra("harga_jual", harga_jual);
+                    intent.putExtra("jumlah", jumlah);
 
                     Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
                     holder.itemView.getContext().startActivity(intent);
@@ -73,10 +75,12 @@ public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHold
                     int id_data = respDataKantin.getId();
                     String nama_barang = respDataKantin.getNamaBarang();
                     String harga_jual = respDataKantin.getHargaJual();
+                    String jumlah = respDataKantin.getJumlah();
 
                     intent.putExtra("id_data", id_data);
-                    intent.putExtra("nama_data",nama_barang);
-                    intent.putExtra("harga_jual",harga_jual);
+                    intent.putExtra("nama_data", nama_barang);
+                    intent.putExtra("harga_jual", harga_jual);
+                    intent.putExtra("jumlah", jumlah);
 
                     Toast.makeText(context, "ID Data "+id_data, Toast.LENGTH_SHORT).show();
                     holder.itemView.getContext().startActivity(intent);

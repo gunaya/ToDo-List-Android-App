@@ -73,5 +73,14 @@ public interface BaseApiService {
     @GET("kantin/get/sql/")
     Call<List<RespDataKantin>> getData();
 
+    @FormUrlEncoded
+    @POST("kantin/update")
+    Call<ResponseBody> updateBarang(@Field("id") int id,
+                                    @Field("nama_barang") String nama_barang,
+                                    @Field("harga_jual") String harga_jual,
+                                    @Field("jumlah") String jumlah);
 
+    @FormUrlEncoded
+    @POST("kantin/delete")
+    Call<ResponseBody> deleteBarang(@Field("id") int id);
 }
