@@ -10,13 +10,12 @@ import android.util.Log;
 import com.google.gson.JsonParser;
 import com.zucc.model.RespDataKantin;
 import com.zucc.todolist.DB.DBHelper;
+import com.zucc.todolist.User.UserHomeActivity;
 import com.zucc.todolist.admin.FragmentActivity;
 import com.zucc.todolist.apihelper.BaseApiService;
 import com.zucc.todolist.apihelper.RetrofitClient;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +30,10 @@ import retrofit2.Response;
  */
 
 public class Condition extends Activity{
-    private static String URL = "http://praktikum.nusapenidaholidaytour.com/api/kantin/get/sql";
-    private static final String TABLE_NAME = "tb_barang";
-    private static final String COLUMN_ID = "";
-    private static final String COLUMN_NAME = "nama_barang";
-    private static final String COLUMN_PHOTO = "foto_barang";
-    private static final String COLUMN_EXP = "kadaluarsa";
-    private static final String COLUMN_SALE = "harga_jual";
-    private static final String COLUMN_CAT = "";
 
     List<RespDataKantin> dataList = new ArrayList<>();
 
     BaseApiService apiService;
-    JSONArray barang = null;
     private DBHelper dbHelper;
 
     @Override
@@ -82,13 +72,20 @@ public class Condition extends Activity{
 
         SharePref sharePref = new SharePref(this);
         int val = sharePref.getDataInt(SharePref.KEY_VALUE,0);
-        Log.d("Values",""+val);
+        String admin = sharePref.getDataString(SharePref.IS_ADMIN);
+        Log.d("Values",""+val+admin);
         if (val == 0) {
             Intent intent = new Intent(Condition.this, LoginActivity.class);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(Condition.this, FragmentActivity.class);
-            startActivity(intent);
+            if (admin.equals("Ya")){
+                Intent intent = new Intent(Condition.this, FragmentActivity.class);
+                startActivity(intent);
+            } else if (admin.equals("Tidak")){
+                Intent intent = new Intent(Condition.this, UserHomeActivity.class);
+                startActivity(intent);
+            }
+
         }
     }
 }
