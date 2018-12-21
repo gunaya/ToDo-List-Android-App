@@ -87,4 +87,9 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("kantin/delete")
     Call<ResponseBody> deleteBarang(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("store_fcm_token")
+    Call<ResponseBody> storetoken(@Field("id") int id,
+                                  @Field("fcm_token") String fcm_token);
 }

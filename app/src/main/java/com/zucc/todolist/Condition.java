@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonParser;
 import com.zucc.model.RespDataKantin;
 import com.zucc.todolist.DB.DBHelper;
@@ -32,7 +33,7 @@ import retrofit2.Response;
 public class Condition extends Activity{
 
     List<RespDataKantin> dataList = new ArrayList<>();
-
+    SharePref sharePref;
     BaseApiService apiService;
     private DBHelper dbHelper;
 
@@ -41,6 +42,9 @@ public class Condition extends Activity{
         super.onCreate(savedInstanceState);
         apiService = RetrofitClient.getService();
         dbHelper = new DBHelper(Condition.this);
+        sharePref.setDataString(SharePref.token, FirebaseInstanceId.getInstance().getToken());
+
+        Log.i("TOKENI", ""+FirebaseInstanceId.getInstance().getToken());
 
         apiService.getData().enqueue(new Callback<List<RespDataKantin>>() {
             @Override

@@ -17,6 +17,7 @@ public class SharePref {
     public final static String IS_ADMIN = "is_admin";
     public final static String KEY_ID = "0";
     public final static String KEY_VALUE = "0";
+    public final static String token = "";
     private SharedPreferences sharedPreferences;
 
     public SharePref (Context context) {
